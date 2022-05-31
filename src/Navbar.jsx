@@ -4,19 +4,20 @@ import { css } from "@emotion/react";
 const Navbar = () => {
   const styles = {
     navbar: css`
-      max-width: 90px;
-      margin: 0 auto;
       & a {
         text-decoration: none;
         color: #ffde00;
         -webkit-text-stroke-width: 1px;
         -webkit-text-stroke-color: #3b4cca;
+        font-size: 44px;
+        font-weight: bold;
       }
       & a:hover {
         color: red;
       }
       & div > a {
         margin-right: 20px;
+        font-size: 40px;
       }
       & nav > a {
         max-width: 100px;
@@ -25,12 +26,10 @@ const Navbar = () => {
   };
   return (
     <nav css={styles.navbar}>
-      <Link to="/home">
-        <h2>Home</h2>
-      </Link>
+      <Link to="/home">Home</Link>
       <div>
         <Link to="home">About</Link>
-        <Link to="create">Contact</Link>
+        <Link to="contact">Contact</Link>
       </div>
     </nav>
   );

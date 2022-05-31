@@ -1,35 +1,40 @@
 import { css } from "@emotion/react";
 import Agent from "./Agent";
+import useFetch from "./useFetch";
 
 /** @jsxImportSource @emotion/react */
 const Agents = () => {
   const listofegents = [
     "lugia",
-    "mew",
-    "sandshrew",
-    "gengar",
-    "haunter",
-    "farfetchd",
+    "charizard",
+    "ho-oh",
+    "zapdos",
+    "articuno",
+    "moltres",
   ];
 
   const styles = {
     agents: css`
-      max-width: 930px;
+      max-width: 600px;
       margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 3%;
+      margin-top: 80px;
     `,
   };
 
   return (
-    <>
+    <div css={styles.agents}>
       {listofegents.map((agent) => {
-        fetch("https://pokeapi.co/api/v2/pokemon/" + agent)
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data);
-          });
-        return <Agent />;
+        return (
+          <Agent
+            API_URL={"https://pokeapi.co/api/v2/pokemon/" + agent}
+            key={agent}
+          />
+        );
       })}
-    </>
+    </div>
   );
 };
 

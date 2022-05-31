@@ -17,7 +17,7 @@ const Home = () => {
   return (
     <>
       <div css={styles.hometext}>
-        <h1>Our Agents</h1>
+        <h1>Our Pilots</h1>
         <p>
           Curabitur ut ex non mauris pellentesque sagittis a sit amet mi. Nullam
           efficitur venenatis felis, ac posuere eros imperdiet in. Vivamus
