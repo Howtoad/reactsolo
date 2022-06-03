@@ -1,12 +1,40 @@
 import { css } from "@emotion/react";
 /** @jsxImportSource @emotion/react */
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 const Contact = () => {
+  const schema = yup
+    .object({
+      firstName: yup
+        .string()
+        .lowercase()
+        .required("Please fill in your name")
+        .min(2, "Your name isnt that short"),
+      eventName: yup
+        .string()
+        .lowercase()
+        .required("Don't forget to name the event")
+        .max(25, "YEah ok buddy, the event name isnt that long"),
+      email: yup
+        .string()
+        .required("Please fill in your email")
+        .email("must be a vlid one sir or mam"),
+      age: yup
+        .number()
+        .typeError("Please fill in your age")
+        .required("")
+        .min(16, "You must be at least 16 to get a flight to an event")
+        .max(55, "No older than 55 due to risk of health issues"),
+    })
+    .required();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
   const onSubmit = (data) => console.log(data);
   const styles = {
     contact: css`
@@ -56,30 +84,23 @@ const Contact = () => {
       <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
         <label>
           Name of event
-          <input
-            type="text"
-            {...register("eventName", {
-              required: true,
-              minLength: 5,
-            })}
-          ></input>
-          <p>
-            {errors.eventName?.type === "required" && " Please name the event"}
-            {errors.eventName?.type === "minLength" &&
-              " No way the event name is that short buddy"}
-          </p>
+          <input type="text" {...register("eventName")}></input>
+          <p>{errors.eventName?.message}</p>
         </label>
         <label>
           Your name
-          <input
-            type="text"
-            {...register("firstName", { required: true, minLength: 2 })}
-          ></input>
-          <p>{errors.firstName?.type === "required" && " Name is required"}</p>
-          <p>
-            {errors.firstName?.type === "minLength" &&
-              " Name must be at least 2 letter"}
-          </p>
+          <input type="text" {...register("firstName")}></input>
+          <p>{errors.firstName?.message}</p>
+        </label>
+        <label>
+          Your e-mail
+          <input type="text" {...register("email")}></input>
+          <p>{errors.email?.message}</p>
+        </label>
+        <label>
+          Age
+          <input type="number" {...register("age")}></input>
+          <p>{errors.age?.message}</p>
         </label>
         <label>
           location of event
