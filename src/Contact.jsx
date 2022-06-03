@@ -44,6 +44,10 @@ const Contact = () => {
         background-color: #3b4cca;
         color: #ffde00;
       }
+      & p {
+        color: red;
+        font-size: 14px;
+      }
     `,
   };
   return (
@@ -52,7 +56,18 @@ const Contact = () => {
       <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
         <label>
           Name of event
-          <input type="text"></input>
+          <input
+            type="text"
+            {...register("eventName", {
+              required: true,
+              minLength: 5,
+            })}
+          ></input>
+          <p>
+            {errors.eventName?.type === "required" && " Please name the event"}
+            {errors.eventName?.type === "minLength" &&
+              " No way the event name is that short buddy"}
+          </p>
         </label>
         <label>
           Your name
@@ -60,9 +75,11 @@ const Contact = () => {
             type="text"
             {...register("firstName", { required: true, minLength: 2 })}
           ></input>
-          {errors.firstName?.type === "required" && " Name is required"}
-          {errors.firstName?.type === "minLength" &&
-            " Name must be at least 2 letter"}
+          <p>{errors.firstName?.type === "required" && " Name is required"}</p>
+          <p>
+            {errors.firstName?.type === "minLength" &&
+              " Name must be at least 2 letter"}
+          </p>
         </label>
         <label>
           location of event
