@@ -1,6 +1,13 @@
 import { css } from "@emotion/react";
 /** @jsxImportSource @emotion/react */
+import { useForm } from "react-hook-form";
 const Contact = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => console.log(data);
   const styles = {
     contact: css`
       margin-bottom: 400px;
@@ -42,14 +49,20 @@ const Contact = () => {
   return (
     <div css={styles.contact}>
       <h1>Booking a flight</h1>
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <label>
           Name of event
           <input type="text"></input>
         </label>
         <label>
           Your name
-          <input type="text"></input>
+          <input
+            type="text"
+            {...register("firstName", { required: true, minLength: 2 })}
+          ></input>
+          {errors.firstName?.type === "required" && " Name is required"}
+          {errors.firstName?.type === "minLength" &&
+            " Name must be at least 2 letter"}
         </label>
         <label>
           location of event
