@@ -49,7 +49,7 @@ const Contact = () => {
   return (
     <div css={styles.contact}>
       <h1>Booking a flight</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
         <label>
           Name of event
           <input type="text"></input>
