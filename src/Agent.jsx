@@ -19,11 +19,15 @@ const Agent = (props) => {
       }
     `,
   };
+  const handleClick = () => {
+    alert(data.name);
+  };
   const { data, pending, error } = useFetch(props.API_URL);
   return (
     <div css={styles.agent}>
       {error && <div>{error.message}</div>}
       <img
+        onClick={handleClick}
         src={(!pending && data.sprites.front_default) || "xD"}
         alt={(!pending && data.name) || "xD"}
       ></img>
