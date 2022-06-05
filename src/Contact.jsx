@@ -4,6 +4,14 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 const Contact = () => {
+  const listofegents = [
+    "lugia",
+    "charizard",
+    "ho-oh",
+    "zapdos",
+    "articuno",
+    "moltres",
+  ];
   const schema = yup
     .object({
       firstName: yup
@@ -112,12 +120,9 @@ const Contact = () => {
         </label>
         <label>
           <select>
-            <option>Lugia</option>
-            <option>Charizard</option>
-            <option>Ho-oh</option>
-            <option>Zapdos</option>
-            <option>Articuno</option>
-            <option>Moltres</option>
+            {listofegents.map((agent) => {
+              return <option value={agent}>{agent}</option>;
+            })}
           </select>
         </label>
         <button>Submit</button>
