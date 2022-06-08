@@ -1,9 +1,12 @@
 import { css } from "@emotion/react";
 import Agent from "./Agent";
 import useFetch from "./useFetch";
+import { useContext } from "react";
+import themeContext from "./Context/themeContext";
 
 /** @jsxImportSource @emotion/react */
 const Agents = () => {
+  const { lightDark } = useContext(themeContext);
   const listofegents = [
     "lugia",
     "charizard",

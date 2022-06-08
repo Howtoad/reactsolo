@@ -4,14 +4,12 @@ import { useContext } from "react";
 import themeContext from "./Context/themeContext";
 /** @jsxImportSource @emotion/react */
 const Navbar = () => {
-  const themechanger = (theme) => {
-    const theme = useContext(themeContext);
-  };
+  const { lightDark } = useContext(themeContext);
   const styles = {
     navbar: css`
       & a {
         text-decoration: none;
-        color: #ffde00;
+        color: ${lightDark && lightDark.primaryColor};
         -webkit-text-stroke-width: 1px;
         -webkit-text-stroke-color: #3b4cca;
         font-size: 44px;
@@ -83,7 +81,7 @@ const Navbar = () => {
     <nav css={styles.navbar}>
       <Link to="/home">Home</Link>
       <label className="switch">
-        <input type="checkbox" onClick={themechanger} />
+        <input type="checkbox" />
         <span className="slider round"></span>
       </label>
       <div>
